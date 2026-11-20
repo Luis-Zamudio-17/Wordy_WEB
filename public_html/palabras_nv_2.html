@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Palabras - Nivel 2</title>
+  <link rel="stylesheet" href="estilos/estilo.css">
+</head>
+<body class="paginas pagina-palabras" data-requiere-sesion data-nivel="2">
+
+  <!-- Menú (hamburguesa) -->
+  <button type="button" id="btnMenu" class="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+    <svg viewBox="0 0 34 34" aria-hidden="true">
+      <path d="M6 9h22M6 17h22M6 25h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
+    <a href="inicio.html">Inicio</a>
+    <a href="cuentos.html">Cuenta cuentos</a>
+    <a href="aprendePalabras.html">Aprende Palabras</a>
+    <a href="controlParental.html">Control Parental</a>
+    <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
+  </nav>
+
+  <!-- Logo del gusano -->
+  <div class="logo">
+    <img src="img/wordy_logo.png" alt="Wordy">
+  </div>
+
+  <main class="palabras-pagina">
+    <header class="palabras-cabecera">
+      <h1 class="titulo">Aprende palabras</h1>
+      <p class="subtitulo">Diccionario del Gusanito</p>
+      <p class="palabras-nivel" id="nombreNivel">Nivel 2</p>
+
+      <!-- Acceso rápido a los demás niveles -->
+      <nav class="niveles-mini" aria-label="Niveles">
+        <a href="palabras_nv_1.html" class="nivel-mini" data-nivel="1">1</a>
+        <a href="palabras_nv_2.html" class="nivel-mini" data-nivel="2">2</a>
+        <a href="palabras_nv_3.html" class="nivel-mini" data-nivel="3">3</a>
+        <a href="palabras_nv_4.html" class="nivel-mini" data-nivel="4">4</a>
+        <a href="palabras_nv_5.html" class="nivel-mini" data-nivel="5">5</a>
+      </nav>
+    </header>
+
+    <!-- Las tarjetas las crea app.js con las palabras de la base de datos -->
+    <section class="panel-palabras" aria-label="Palabras del nivel">
+      <div class="rejilla-palabras" id="listaPalabras" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- Botón de casa -->
+  <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

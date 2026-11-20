@@ -6,15 +6,16 @@
   <title>Wordy | Crear Cuenta</title>
   <link rel="stylesheet" href="estilos/estilo.css">
 </head>
-<body>
+<body class="pagina-registro">
 
+  <!-- Imagen del gusano (sin modificaciones en su posición) -->
   <div class="logo">
     <img src="img/wordy_logo.png" alt="Wordy">
   </div>
 
   <main class="contenedor">
-    <h1 class="titulo">¡Únete a Wordy!</h1>
-    <p class="subtitulo">Crea tu cuenta para empezar la aventura</p>
+    <h1 class="titulo">¡Bienvenido a Wordy!</h1>
+    <p class="subtitulo">Donde las letras cobran vida...</p>
 
     <div class="avatar" aria-hidden="true">
       <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -24,27 +25,12 @@
       </svg>
     </div>
 
-    <!-- FORMULARIO DE REGISTRO CONECTADO A SPRING BOOT -->
+    <!-- Formulario de registro adaptado a la Diapositiva 3 -->
     <form id="formRegistro" class="tarjeta" novalidate>
-      <h2>Crea tu cuenta</h2>
+      <h2>Crea una cuenta para continuar</h2>
 
       <div class="campo">
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
-        <span class="error">Ingresa tu nombre.</span>
-      </div>
-
-      <div class="campo">
-        <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" required>
-        <span class="error">Ingresa un usuario.</span>
-      </div>
-
-      <div class="campo">
-        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
-        <span class="error">Ingresa una contraseña.</span>
-      </div>
-
-      <div class="campo">
-        <select id="tipo_cuenta" name="tipo_cuenta" required>
+        <select id="tipo_cuenta" name="tipo_cuenta" required aria-label="Tipo de cuenta">
           <option value="" selected disabled hidden>Tipo de cuenta</option>
           <option value="estudiante">Estudiante (Niño)</option>
           <option value="tutor">Padre / Tutor</option>
@@ -52,16 +38,30 @@
         <span class="error">Selecciona un tipo de cuenta.</span>
       </div>
 
+      <div class="campo">
+        <input type="email" id="correo" name="correo" placeholder="Correo" autocomplete="email" required>
+        <span class="error">Ingresa tu correo.</span>
+      </div>
+
+      <div class="campo">
+        <input type="text" id="usuario" name="usuario" placeholder="Usuario" autocomplete="username" required>
+        <span class="error">Ingresa un usuario.</span>
+      </div>
+
+      <div class="campo">
+        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" autocomplete="new-password" required>
+        <span class="error">Ingresa una contraseña.</span>
+      </div>
+
       <p id="mensaje" class="mensaje" role="alert" aria-live="polite"></p>
     </form>
 
     <div class="botones">
-      <button type="submit" form="formRegistro" class="btn btn-rojo">Registrarse</button>
-      <a href="index.html" class="btn btn-naranja">Volver al Login</a>
+      <button type="submit" form="formRegistro" class="btn btn-turquesa">Registrar</button>
     </div>
+      <p class="enlace">¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
   </main>
 
-  <!-- Importante: Cargamos el script.js que ya tiene la lógica de registro -->
   <script src="script.js"></script>
 </body>
 </html>

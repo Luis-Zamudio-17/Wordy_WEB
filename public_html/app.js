@@ -176,7 +176,7 @@ function mostrarAviso(texto) {
   mostrarAviso.temporizador = setTimeout(() => aviso.classList.remove('visible'), 3200);
 }
 
-function iniciarCuentos() {
+function iniciar() {
   const boton = document.getElementById('btnJugar');
   if (!boton) return;
 
@@ -185,9 +185,14 @@ function iniciarCuentos() {
     const racha = await registrarDiaJugado();
     mostrarAviso('¡Día jugado! Racha: ' + racha + (racha === 1 ? ' día' : ' días'));
 
-    // Cuando exista la pantalla del juego, pon su ruta en data-destino del botón
-    const destino = boton.getAttribute('data-destino');
-    if (destino) window.location.href = destino;
+    // MODIFICACIÓN: Lee data-destino o usa el href del botón si no está vacío ni es "#"
+    const destino = boton.getAttribute('data-destino') || boton.getAttribute('href');
+    if (destino && destino !== '#') {
+      // Opcional: un pequeño retraso para que alcance a verse el aviso de la racha
+      setTimeout(() => {
+        window.location.href = destino;
+      }, 800);
+    }
   });
 }
 
@@ -262,5 +267,5 @@ if (document.body.hasAttribute('data-requiere-sesion') && !obtenerSesion()) {
   if (botonSalir) botonSalir.addEventListener('click', cerrarSesion);
   iniciarMenu();
   iniciarInicio();
-  iniciarCuentos();
+  iniciar();
 }
