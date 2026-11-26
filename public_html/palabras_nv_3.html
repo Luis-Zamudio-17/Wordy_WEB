@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wordy | Palabras - Nivel 3</title>
+  <title>Wordy | Diccionario del gusanito - Nivel 3</title>
   <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/palabras.css">
 </head>
 <body class="paginas pagina-palabras" data-requiere-sesion data-nivel="3">
 
@@ -16,7 +17,7 @@
   </button>
   <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
     <a href="inicio.html">Inicio</a>
-    <a href="cuentos.html">Cuenta cuentos</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
     <a href="aprendePalabras.html">Aprende Palabras</a>
     <a href="controlParental.html">Control Parental</a>
     <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
@@ -27,7 +28,8 @@
     <img src="img/wordy_logo.png" alt="Wordy">
   </div>
 
-  <main class="palabras-pagina">
+  <main class="palabras-pagina pa-modulo" id="pa-modulo" data-vista="diccionario">
+    <div id="pa-aviso" class="pa-aviso" role="status" aria-live="polite" hidden></div>
     <header class="palabras-cabecera">
       <h1 class="titulo">Aprende palabras</h1>
       <p class="subtitulo">Diccionario del Gusanito</p>
@@ -43,20 +45,33 @@
       </nav>
     </header>
 
-    <!-- Las tarjetas las crea app.js con las palabras de la base de datos -->
+    <!-- "Mis palabras": las tarjetas las crea palabrasModulo.js con lo que el niño ya desbloqueó (BD) -->
     <section class="panel-palabras" aria-label="Palabras del nivel">
+      <p class="pa-dic-resumen" id="pa-dic-resumen" aria-live="polite"></p>
       <div class="rejilla-palabras" id="listaPalabras" aria-live="polite"></div>
     </section>
   </main>
 
-  <!-- Botón de casa -->
-  <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-    </svg>
-  </a>
+  <!-- Botones de navegación inferiores (Casita y Regresar) -->
+  <div class="navegacion-inferior">
+    <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <!-- Botón Regresar -->
+    <a href="javascript:history.back()" class="btn-regresar" aria-label="Regresar">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <path d="M 38 10 C 40 9, 42 10, 42 13 L 42 22 C 68 22, 84 40, 82 58 C 80 73, 60 80, 32 77
+                 C 53 75, 67 66, 68 54 C 69 42, 57 35, 42 35 L 42 44 C 42 47, 40 48, 38 47 L 12 31
+                 C 9 29.5, 9 27.5, 12 26 Z" fill="#fff" />
+      </svg>
+      <span>Regresar</span>
+    </a>
+  </div>
 
   <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
+  <script src="palabrasModulo.js"></script>
 </body>
 </html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Aprende palabras - Jugar</title>
+  <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/palabras.css">
+</head>
+<body class="paginas" data-requiere-sesion>
+
+  <!-- Menú (hamburguesa) -->
+  <button type="button" id="btnMenu" class="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+    <svg viewBox="0 0 34 34" aria-hidden="true">
+      <path d="M6 9h22M6 17h22M6 25h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
+    <a href="inicio.html">Inicio</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
+    <a href="aprendePalabras.html">Aprende Palabras</a>
+    <a href="controlParental.html">Control Parental</a>
+    <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
+  </nav>
+
+  <!-- Logo del gusano -->
+  <div class="logo">
+    <img src="img/wordy_logo.png" alt="Wordy">
+  </div>
+
+  <main class="pa-modulo" id="pa-modulo" data-vista="jugar">
+    <div id="pa-aviso" class="pa-aviso" role="status" aria-live="polite" hidden></div>
+    <a class="pa-regresar" id="pa-regresar" href="palabrasSelecciona.html">← Mapa</a>
+
+    <p class="pa-cargando" id="pa-cargando">Cargando la actividad…</p>
+
+    <div id="pa-error" class="pa-tarjeta-aviso" role="alert" hidden>
+      <p id="pa-error-texto">No se pudo cargar la actividad.</p>
+      <a id="pa-error-mapa" class="pa-btn3d pa-c1" href="palabrasSelecciona.html">Volver al mapa</a>
+    </div>
+
+    <section id="pa-juego" hidden>
+      <header class="pa-juego-cabecera">
+        <h1 class="pa-titulo">Aprende palabras</h1>
+        <p class="pa-subtitulo" id="pa-nivel-texto"></p>
+        <button type="button" class="pa-revisar" id="pa-revisar">Revisar
+          <svg viewBox="0 0 60 60" aria-hidden="true">
+            <path fill="#4b76c8" d="M30 3l2.6 5.3 5.8.8-4.2 4.1 1 5.8L30 16.3 24.8 19l1-5.8-4.2-4.1 5.8-.8z"/>
+            <path fill="#4b76c8" d="M10 12l2 4 4.4.6-3.2 3.1.8 4.4-4-2.1-4 2.1.8-4.4-3.2-3.1L8 16zM50 12l2 4 4.4.6-3.2 3.1.8 4.4-4-2.1-4 2.1.8-4.4-3.2-3.1L48 16z"/>
+            <circle cx="30" cy="32" r="8" fill="#4b76c8"/>
+            <path fill="#4b76c8" d="M14 58c0-10 7-16 16-16s16 6 16 16z"/>
+          </svg>
+        </button>
+        <p class="pa-progreso" id="pa-progreso-texto"></p>
+        <div class="pa-progreso-barra"><span id="pa-progreso-barra"></span></div>
+        <p class="pa-banner" id="pa-banner" hidden></p>
+      </header>
+
+      <!-- ===== Ejercicios prácticos (pág. 5): significado + sílabas ===== -->
+      <div id="pa-vista-practica" hidden>
+        <div class="pa-tablero">
+          <div class="pa-pregunta" id="pa-bloque-sig">
+            <h2 id="pa-sig-enunciado">¿Cuál es el significado correcto de la palabra?</h2>
+            <ul class="pa-opciones-texto" id="pa-opciones-sig"></ul>
+          </div>
+          <div class="pa-tarjeta-amarilla" id="pa-bloque-sil">
+            <p id="pa-sil-enunciado"></p>
+            <p class="pa-patron" id="pa-patron"></p>
+            <div class="pa-silabas" id="pa-silabas"></div>
+          </div>
+        </div>
+
+        <!-- Gusanito Sabio: al tocarlo da una pista -->
+        <div class="pa-sabio">
+          <p class="pa-globo" id="pa-globo" aria-live="polite"></p>
+          <button type="button" class="pa-gusano-btn" id="pa-gusano" aria-label="Pedir una pista al Gusanito Sabio">
+            <img src="img/gusano_lector.png" alt="">
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== Relacionar con imágenes (pág. 6) ===== -->
+      <div id="pa-vista-imagenes" hidden>
+        <div class="pa-tablero">
+          <div class="pa-imagenes" id="pa-imagenes" aria-label="Imágenes"></div>
+          <div>
+            <div class="pa-tarjeta-amarilla">
+              <p id="pa-img-enunciado">Relaciona la palabra con su imagen descriptiva</p>
+              <div class="pa-chips" id="pa-chips" aria-label="Palabras"></div>
+            </div>
+            <p class="pa-centro" style="margin-top:14px;font-size:.85rem;font-weight:600">
+              Toca una palabra y luego su imagen (o arrástrala). Después pulsa <b>Revisar</b>.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="pa-mensaje" id="pa-mensaje" aria-live="polite"></p>
+      <div class="pa-descubierta" id="pa-descubierta" hidden></div>
+      <p class="pa-centro" style="margin-top:18px">
+        <button type="button" class="pa-btn3d pa-c0" id="pa-siguiente" hidden>Siguiente palabra ▶</button>
+      </p>
+    </section>
+
+    <!-- ===== Resultado del nivel ===== -->
+    <section class="pa-resultado" id="pa-resultado" hidden aria-live="polite">
+      <div class="pa-estrellas" id="pa-res-estrellas"></div>
+      <h2 id="pa-res-titulo"></h2>
+      <p id="pa-res-sub"></p>
+      <div id="pa-res-nuevas" hidden>
+        <p>Palabras nuevas en tu diccionario:</p>
+        <div class="pa-res-palabras" id="pa-res-palabras"></div>
+      </div>
+      <p id="pa-res-mensaje"></p>
+      <div class="pa-res-acciones" id="pa-res-acciones"></div>
+    </section>
+
+    <a href="palabras_nv_1.html" class="pa-dic pa-dic-fijo">
+        <span class="pa-dic-icono" aria-hidden="true">📖</span><span>Diccionario del<br>gusanito</span>
+      </a>
+  </main>
+
+  <!-- Botones de navegación inferiores (Casita y Regresar) -->
+  <div class="navegacion-inferior">
+    <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <!-- Botón Regresar -->
+    <a href="javascript:history.back()" class="btn-regresar" aria-label="Regresar">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <path d="M 38 10 C 40 9, 42 10, 42 13 L 42 22 C 68 22, 84 40, 82 58 C 80 73, 60 80, 32 77
+                 C 53 75, 67 66, 68 54 C 69 42, 57 35, 42 35 L 42 44 C 42 47, 40 48, 38 47 L 12 31
+                 C 9 29.5, 9 27.5, 12 26 Z" fill="#fff" />
+      </svg>
+      <span>Regresar</span>
+    </a>
+  </div>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+  <script src="palabrasModulo.js"></script>
+</body>
+</html>

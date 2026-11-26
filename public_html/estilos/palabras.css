@@ -1,0 +1,513 @@
+/* ======================================================================
+   palabras.css  -  Módulo APRENDE PALABRAS (Wordy)
+   Ubicación: public_html/estilos/palabras.css   (se carga DESPUÉS de estilo.css)
+
+   Todo lo nuevo empieza con "pa-" para no chocar con estilo.css ni cuentos.css.
+   Reutiliza las variables de estilo.css (--navy, --naranja, --turquesa, --lila,
+   --amarillo, --rojo...). Look and feel tomado de "Sitio Web Wordy" págs. 1 a 8:
+     - fondo crema, título Fredoka azul marino
+     - tarjeta amarilla redonda con borde inferior grueso
+     - botones 3D (color sólido + sombra dura abajo)
+   ====================================================================== */
+
+.pa-modulo {
+  --verde: #a3c623;  --verde-s: #6f8a14;
+  --rosa: #ff759f;   --rosa-s: #d9537c;
+  --cielo: #c9e9fd;
+  --ok: #2a9d6f;     --mal: #e5484d;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 92px 22px 150px;      /* deja libres las olas azules de arriba y abajo */
+  color: var(--navy);
+  font-family: 'Poppins', sans-serif;
+}
+.pa-modulo *, .pa-modulo *::before, .pa-modulo *::after { box-sizing: border-box; }
+.pa-modulo [hidden] { display: none !important; }
+.pa-modulo :focus-visible { outline: 4px solid var(--azul-ola); outline-offset: 3px; }
+
+/* Dentro de .general (mapa) el padding ya lo pone estilo.css */
+.general .pa-modulo { padding-top: 0; padding-bottom: 0; }
+.general .pa-modulo .pa-dic-arriba { top: 34px; right: -40px; }
+.general.mapa-contenedor { justify-content: flex-start; padding-top: 96px; }
+
+/* Diccionario: no debe tapar la ola azul de abajo (estilo.css la dibuja con body::after) */
+.palabras-pagina.pa-modulo { position: static; z-index: auto; max-width: none; padding: 0; }
+
+/* Fondo azul cielo arriba (pág. 2 "Selecciona la actividad") */
+body.pa-cielo { background: linear-gradient(var(--cielo, #c9e9fd) 0 64%, var(--crema) 64%); }
+
+/* ------------------------------------------------------------ títulos */
+.pa-titulo {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.3rem, 5.4vw, 3.9rem);
+  line-height: 1.05;
+  text-align: center;
+  margin: 0;
+}
+.pa-subtitulo {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.1vw, 1.35rem);
+  text-align: center;
+  margin: 4px 0 0;
+}
+.pa-centro { text-align: center; }
+
+/* ------------------------------------------------------- botones 3D */
+.pa-btn3d {
+  --c: var(--naranja); --s: var(--naranja-sombra);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 6px;
+  background: var(--c);
+  box-shadow: 0 7px 0 var(--s);
+  color: var(--navy);
+  font: 700 1rem 'Poppins', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .1s, box-shadow .1s, filter .15s;
+  user-select: none;
+}
+.pa-btn3d:hover { filter: brightness(1.05); }
+.pa-btn3d:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--s); }
+.pa-btn3d[disabled], .pa-btn3d.pa-apagado { filter: grayscale(.8); opacity: .6; cursor: not-allowed; }
+.pa-c0 { --c: var(--naranja);  --s: var(--naranja-sombra); }
+.pa-c1 { --c: var(--turquesa); --s: var(--turquesa-sombra); }
+.pa-c2 { --c: var(--lila);     --s: var(--lila-sombra); }
+.pa-c3 { --c: #ff759f;         --s: #d9537c; }
+.pa-c4 { --c: var(--rojo);     --s: var(--rojo-sombra); }
+.pa-verde { --c: #a3c623; --s: #6f8a14; }
+
+/* Botón "Diccionario del gusanito" (turquesa con libro ABC) */
+.pa-dic {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: #77d3c9;
+  box-shadow: 0 6px 0 #4a9aa6;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: .78rem;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  transition: transform .1s;
+}
+.pa-dic:hover { transform: translateY(-2px); }
+.pa-dic-icono { font-size: 1.7rem; line-height: 1; }
+.pa-dic-fijo { position: absolute; right: 22px; bottom: 112px; z-index: 4; }
+.pa-dic-arriba { position: absolute; right: 22px; top: 92px; z-index: 4; }
+
+/* Regresar (flecha azul) arriba a la izquierda */
+.pa-regresar {
+  position: absolute;
+  left: 22px;
+  top: 92px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--azul-ola);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------ avisos */
+.pa-aviso {
+  position: fixed;
+  left: 50%;
+  top: 18px;
+  z-index: 60;
+  transform: translateX(-50%);
+  max-width: min(92vw, 560px);
+  padding: 12px 20px;
+  border-radius: 14px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: .92rem;
+  box-shadow: 0 6px 0 rgba(0,0,0,.2);
+}
+.pa-aviso-error { background: #c2373c; }
+.pa-aviso-ok { background: var(--ok); }
+
+.pa-tarjeta-aviso {
+  max-width: 520px;
+  margin: 30px auto;
+  padding: 22px;
+  border-radius: 24px;
+  background: var(--amarillo);
+  border-bottom: 8px solid var(--amarillo-borde);
+  text-align: center;
+  font-weight: 700;
+}
+.pa-tarjeta-aviso p { margin-bottom: 14px; }
+.pa-cargando { text-align: center; font-weight: 700; margin: 50px 0; }
+.pa-banner {
+  max-width: 760px;
+  margin: 10px auto 0;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: #fff1c9;
+  font-size: .85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ================================================= PÁG. 2: elegir actividad */
+.pa-actividades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 46px;
+}
+.pa-act {
+  width: min(330px, 90vw);
+  padding: 26px 30px 34px;
+  border-radius: 46px;
+  background: #fff;
+  box-shadow: 0 22px 0 #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.pa-act h2 { align-self: flex-start; font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.pa-act-dibujo { height: 150px; display: flex; align-items: center; justify-content: center; margin-bottom: -10px; }
+.pa-act-dibujo svg { height: 140px; width: auto; }
+.pa-act-ninos {
+  font-size: 3.4rem;
+  letter-spacing: -6px;
+  background: radial-gradient(ellipse at 50% 70%, #eadfcf 0 55%, transparent 56%);
+  padding: 20px 28px 6px;
+}
+.pa-act .pa-btn3d { width: 100%; min-height: 54px; position: relative; z-index: 1; }
+
+/* ================================================= PÁGS. 3-4: mapa de niveles */
+.pa-mapa-actividad { margin-top: 6px; text-align: center; font-weight: 700; color: var(--azul-ola); }
+.pa-mapa-ayuda { text-align: center; font-size: .9rem; font-weight: 600; margin: 6px 0 10px; }
+.pa-modulo .camino-imagen-fondo { margin-top: 6px; }
+.pa-modulo .node { text-decoration: none; }
+.pa-modulo .node.pa-hecho::after {
+  content: "✓";
+  position: absolute;
+  right: -6%;
+  top: -6%;
+  width: 38%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ok, #2a9d6f);
+  color: #fff;
+  font-size: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 0 rgba(0,0,0,.2);
+}
+.pa-modulo .node.pa-actual { animation: pa-latido 1.4s ease-in-out infinite; }
+@keyframes pa-latido { 50% { transform: translate(-50%, -50%) scale(1.08); } }
+
+/* ================================================= PÁGS. 5-6: juego */
+.pa-juego-cabecera { position: relative; }
+.pa-revisar {
+  position: absolute;
+  right: 0;
+  top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  color: var(--azul-ola);
+  font: 700 1.15rem 'Poppins', sans-serif;
+  cursor: pointer;
+}
+.pa-revisar svg { width: 54px; height: 54px; }
+.pa-revisar:hover { transform: scale(1.04); }
+.pa-revisar.pa-pulso { animation: pa-pulso 1s ease-in-out infinite; }
+@keyframes pa-pulso { 50% { transform: scale(1.1); } }
+.pa-progreso { text-align: center; font-weight: 700; font-size: .9rem; margin-top: 4px; }
+.pa-progreso-barra { width: min(320px, 70vw); height: 10px; margin: 6px auto 0; border-radius: 10px; background: #e9e1d2; overflow: hidden; }
+.pa-progreso-barra span { display: block; height: 100%; width: 0; background: var(--turquesa); transition: width .3s; }
+
+.pa-tablero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 30px;
+}
+
+/* Pregunta de significado (izquierda) */
+.pa-pregunta h2 { font-size: 1.02rem; font-weight: 700; margin-bottom: 14px; }
+.pa-pregunta h2 b { color: var(--azul-ola); }
+.pa-opciones-texto { list-style: none; display: grid; gap: 8px; }
+.pa-op-texto {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--navy);
+  font: 700 .98rem/1.35 'Poppins', sans-serif;
+  text-align: justify;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.pa-op-texto:hover { background: #fff3d6; }
+.pa-op-texto.pa-elegida { border-color: var(--azul-ola); background: #eaf1ff; }
+.pa-op-letra { flex: none; }
+
+/* Tarjeta amarilla (derecha) */
+.pa-tarjeta-amarilla {
+  padding: 26px 26px 34px;
+  border-radius: 42px;
+  background: var(--amarillo);
+  border-bottom: 9px solid var(--amarillo-borde);
+  font-weight: 700;
+}
+.pa-tarjeta-amarilla p { text-align: justify; line-height: 1.45; }
+.pa-patron {
+  margin: 10px 0 18px;
+  text-align: center;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+}
+.pa-patron .pa-hueco { color: var(--azul-ola); }
+.pa-frase-silabas { font-size: .88rem; font-weight: 600; text-align: center !important; margin-top: -8px; margin-bottom: 14px; }
+.pa-silabas { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+.pa-silabas .pa-btn3d { min-width: 92px; }
+.pa-silabas .pa-btn3d.pa-elegida, .pa-chip.pa-elegida { outline: 4px solid var(--navy); outline-offset: 2px; }
+
+/* Estados de respuesta */
+.pa-bien { background: #d7f5e5 !important; border-color: var(--ok) !important; --c: #8be0b5; --s: var(--ok); }
+.pa-mal  { background: #ffe1e1 !important; border-color: var(--mal) !important; --c: #ffb3b3; --s: var(--mal); animation: pa-tiembla .35s; }
+@keyframes pa-tiembla { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+/* Gusanito sabio + globo de pista */
+.pa-sabio {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 18px;
+  min-height: 140px;
+}
+.pa-sabio-emoji { font-size: 3.2rem; align-self: center; }
+.pa-globo {
+  position: relative;
+  max-width: 300px;
+  padding: 14px 18px;
+  border-radius: 26px;
+  background: #f6e3c2;
+  font-weight: 700;
+  font-size: .9rem;
+  align-self: center;
+}
+.pa-globo::after {
+  content: "";
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  border: 10px solid transparent;
+  border-left: 16px solid #f6e3c2;
+  transform: translateY(-50%);
+}
+.pa-gusano-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform .15s;
+}
+.pa-gusano-btn:hover { transform: rotate(-4deg) scale(1.04); }
+.pa-gusano-btn img { width: 210px; height: auto; display: block; }
+
+/* Mensaje del resultado de cada palabra */
+.pa-mensaje { min-height: 1.6em; margin-top: 16px; text-align: center; font-weight: 700; }
+.pa-mensaje-ok { color: var(--ok); }
+.pa-mensaje-error { color: #c2373c; }
+
+/* "Mira y escucha": palabra descubierta */
+.pa-descubierta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 14px auto 0;
+  padding: 12px 20px;
+  max-width: 560px;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 6px 0 #d4dde3;
+  animation: pa-aparece .35s ease-out;
+}
+@keyframes pa-aparece { from { transform: scale(.8); opacity: 0; } }
+.pa-descubierta .pa-figura { width: 72px; height: 72px; font-size: 3rem; }
+.pa-descubierta b { font-size: 1.4rem; font-family: 'Fredoka', sans-serif; }
+.pa-escuchar {
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  background: var(--turquesa);
+  box-shadow: 0 4px 0 var(--turquesa-sombra);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Imagen o emoji */
+.pa-figura {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.pa-figura img { width: 100%; height: 100%; object-fit: contain; }
+
+/* --------- Relacionar con imágenes --------- */
+.pa-imagenes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pa-casilla {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border: 3px dashed transparent;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: background .15s, border-color .15s;
+}
+.pa-casilla:hover, .pa-casilla.pa-sobre { background: #fff3d6; border-color: var(--amarillo-borde); }
+.pa-casilla .pa-figura { width: 128px; height: 118px; font-size: 5.2rem; }
+.pa-casilla-slot {
+  min-width: 110px;
+  min-height: 36px;
+  padding: 5px 10px;
+  border: 2px dashed #b9c3d6;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pa-casilla.pa-bien .pa-casilla-slot { border-style: solid; border-color: var(--ok); background: #d7f5e5; }
+.pa-casilla.pa-mal .pa-casilla-slot { border-color: var(--mal); }
+.pa-casilla.pa-bien { border-color: transparent !important; background: transparent !important; cursor: default; }
+.pa-pista-casilla { font-size: .78rem; font-weight: 700; color: #c2373c; text-align: center; }
+
+.pa-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px 14px; margin-top: 14px; min-height: 120px; }
+.pa-chip { min-width: 92px; padding: 8px 16px; font-size: .95rem; }
+.pa-chip[draggable="true"] { cursor: grab; }
+
+/* ================================================= Resultado */
+.pa-resultado {
+  max-width: 640px;
+  margin: 34px auto 0;
+  padding: 28px 30px 36px;
+  border-radius: 42px;
+  background: var(--amarillo);
+  border-bottom: 9px solid var(--amarillo-borde);
+  text-align: center;
+  animation: pa-aparece .4s ease-out;
+}
+.pa-estrellas { font-size: 3.2rem; letter-spacing: 6px; }
+.pa-estrella { color: #e3d6a8; }
+.pa-estrella.llena { color: #ffb800; text-shadow: 0 3px 0 #e08f00; }
+.pa-resultado h2 { font-family: 'Fredoka', sans-serif; font-size: 1.9rem; margin: 6px 0; }
+.pa-resultado p { font-weight: 600; margin: 6px 0; }
+.pa-res-palabras { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px 0; }
+.pa-res-palabras span { padding: 5px 12px; border-radius: 20px; background: #fff; font-weight: 700; font-size: .9rem; }
+.pa-res-acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 20px; }
+
+/* ================================================= Diccionario + repaso */
+.pa-dic-vacio {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 26px;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 6px 0 #d4dde3;
+  text-align: center;
+  font-weight: 700;
+}
+.pa-dic-vacio .pa-btn3d { margin-top: 14px; }
+.palabra-tarjeta .pa-figura { width: 100%; height: 70px; font-size: 3rem; margin: 2px 0 6px; }
+.palabra-tarjeta .pa-btn-repasar {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 4px 10px;
+  font-size: .78rem;
+  box-shadow: 0 4px 0 var(--s);
+}
+.palabra-tarjeta .palabra-icono { border: none; background: none; cursor: pointer; padding: 0; }
+.palabra-tarjeta.bloqueada h3 { letter-spacing: 3px; }
+.pa-repasos { display: block; margin-top: 6px; font-size: .6rem; font-weight: 700; color: #5b6580; }
+.pa-dic-resumen { text-align: center; font-weight: 700; margin-bottom: 18px; }
+
+.pa-modal-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(31, 42, 77, .55);
+}
+.pa-modal {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  padding: 26px 26px 30px;
+  border-radius: 34px;
+  background: var(--crema);
+  border-bottom: 9px solid var(--amarillo-borde);
+  color: var(--navy);
+  font-family: 'Poppins', sans-serif;
+}
+.pa-modal h2 { font-family: 'Fredoka', sans-serif; font-size: 1.6rem; text-align: center; margin-bottom: 12px; }
+.pa-modal-cerrar {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  border: none;
+  background: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--navy);
+}
+
+/* ================================================= Responsivo */
+@media (max-width: 860px) {
+  .pa-tablero { grid-template-columns: 1fr; gap: 26px; }
+  .pa-revisar { position: static; margin: 10px auto 0; display: flex; }
+  .pa-dic-fijo, .pa-dic-arriba { position: static; margin: 22px auto 0; display: flex; width: max-content; }
+  .pa-regresar { position: static; margin-bottom: 8px; }
+  .pa-imagenes { grid-template-columns: repeat(2, 1fr); }
+  .pa-gusano-btn img { width: 110px; }
+}
+@media (max-width: 480px) {
+  .pa-modulo { padding-left: 12px; padding-right: 12px; }
+  .pa-casilla .pa-figura { width: 100px; height: 92px; font-size: 4rem; }
+  .pa-globo { max-width: 200px; font-size: .8rem; }
+}

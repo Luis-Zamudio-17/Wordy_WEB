@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wordy | Aprende Palabras</title>
   <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/palabras.css">
 </head>
 
 <body class="paginas" data-requiere-sesion>
@@ -17,7 +18,7 @@
   </button>
   <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
     <a href="inicio.html">Inicio</a>
-    <a href="cuentos.html">Cuenta cuentos</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
     <a href="aprendePalabras.html">Aprende Palabras</a>
     <a href="controlParental.html">Control Parental</a>
     <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
@@ -41,12 +42,17 @@
       <h4>6. ¡Sigue aprendiendo!: Al terminar, desbloquearás la palabra y podrás encontrarla en "El diccionario del gusanito" para repasarla.</h4>
       
       <div class="acciones">
-        <a href="palabrasSelecciona.html" id="btnJugar" class="btn btn-naranja btn-grande">¡Jugar ahora!</a>
+        <a href="palabrasActividad.html" id="btnJugar" class="btn btn-naranja btn-grande">¡Jugar ahora!</a>
         <!-- Imagen del gusano lector (img/gusano-lector.png) -->
         <img class="acciones-gusano-p" src="img/gusano_lector.png" alt="">
       </div>
     </section>
   </main>
+
+  <!-- Diccionario del gusanito ("Mis palabras"): solo muestra las palabras ya desbloqueadas -->
+  <a href="palabras_nv_1.html" class="pa-dic pa-dic-fijo">
+    <span class="pa-dic-icono" aria-hidden="true">📖</span><span>Diccionario del<br>gusanito</span>
+  </a>
 
   <!-- Contenedor de botones de navegación inferior -->
 <!-- Botones de navegación inferiores (Casita y Regresar) -->

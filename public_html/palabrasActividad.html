@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Aprende palabras - Actividades</title>
+  <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/palabras.css">
+</head>
+<body class="paginas pa-cielo" data-requiere-sesion>
+
+  <!-- Menú (hamburguesa) -->
+  <button type="button" id="btnMenu" class="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+    <svg viewBox="0 0 34 34" aria-hidden="true">
+      <path d="M6 9h22M6 17h22M6 25h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
+    <a href="inicio.html">Inicio</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
+    <a href="aprendePalabras.html">Aprende Palabras</a>
+    <a href="controlParental.html">Control Parental</a>
+    <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
+  </nav>
+
+  <!-- Logo del gusano -->
+  <div class="logo">
+    <img src="img/wordy_logo.png" alt="Wordy">
+  </div>
+
+  <main class="pa-modulo" id="pa-modulo" data-vista="actividad">
+    <h1 class="pa-titulo">Aprende palabras</h1>
+    <p class="pa-subtitulo">¡Selecciona la actividad que explorarás!</p>
+
+    <section class="pa-actividades" aria-label="Actividades">
+      <article class="pa-act">
+        <h2>Ejercicios prácticos</h2>
+        <div class="pa-act-dibujo" aria-hidden="true">
+          <svg viewBox="0 0 150 130">
+            <rect x="62" y="20" width="68" height="96" rx="4" fill="#ffe08a" transform="rotate(14 96 68)"/>
+            <rect x="50" y="14" width="68" height="96" rx="4" fill="#ffb366" transform="rotate(7 84 62)"/>
+            <rect x="34" y="8" width="70" height="98" rx="4" fill="#fff" stroke="#f05a5a" stroke-width="7"/>
+            <text x="44" y="38" font-family="Fredoka, sans-serif" font-weight="700" font-size="20" fill="#1f2a4d">Aa</text>
+            <circle cx="69" cy="66" r="15" fill="#f05a5a"/>
+            <path d="M69 52c1-6 5-8 9-8-1 4-4 7-9 8z" fill="#6fbf4a"/>
+            <rect x="48" y="88" width="42" height="7" rx="2" fill="#f05a5a"/>
+          </svg>
+        </div>
+        <a class="pa-btn3d pa-verde" href="palabrasSelecciona.html?actividad=practica">¡Jugar!</a>
+      </article>
+
+      <article class="pa-act">
+        <h2>Relacionar con imágenes</h2>
+        <div class="pa-act-dibujo"><span class="pa-act-ninos" role="img" aria-label="Niños leyendo">👧📖👦</span></div>
+        <a class="pa-btn3d pa-verde" href="palabrasSelecciona.html?actividad=imagenes">¡Jugar!</a>
+      </article>
+    </section>
+  </main>
+
+  <!-- Botones de navegación inferiores (Casita y Regresar) -->
+  <div class="navegacion-inferior">
+    <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <!-- Botón Regresar -->
+    <a href="javascript:history.back()" class="btn-regresar" aria-label="Regresar">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <path d="M 38 10 C 40 9, 42 10, 42 13 L 42 22 C 68 22, 84 40, 82 58 C 80 73, 60 80, 32 77
+                 C 53 75, 67 66, 68 54 C 69 42, 57 35, 42 35 L 42 44 C 42 47, 40 48, 38 47 L 12 31
+                 C 9 29.5, 9 27.5, 12 26 Z" fill="#fff" />
+      </svg>
+      <span>Regresar</span>
+    </a>
+  </div>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+  <script src="palabrasModulo.js"></script>
+</body>
+</html>

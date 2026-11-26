@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wordy | Selección de Nivel</title>
+  <title>Wordy | Aprende palabras - Niveles</title>
   <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/palabras.css">
 </head>
 <body class="paginas" data-requiere-sesion>
 
@@ -16,7 +17,7 @@
   </button>
   <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
     <a href="inicio.html">Inicio</a>
-    <a href="cuentos.html">Cuenta cuentos</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
     <a href="aprendePalabras.html">Aprende Palabras</a>
     <a href="controlParental.html">Control Parental</a>
     <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
@@ -27,33 +28,59 @@
     <img src="img/wordy_logo.png" alt="Wordy">
   </div>
 
-  <!-- Contenedor principal -->
   <main class="general mapa-contenedor">
-    <h1 class="titulo">Aprende palabras</h1>
-    <p class="subtitulo">Conoce las palabras del día</p>
+    <div class="pa-modulo" id="pa-modulo" data-vista="mapa">
+      <div id="pa-aviso" class="pa-aviso" role="status" aria-live="polite" hidden></div>
+      <a href="palabras_nv_1.html" class="pa-dic pa-dic-arriba">
+        <span class="pa-dic-icono" aria-hidden="true">📖</span><span>Diccionario del<br>gusanito</span>
+      </a>
 
-    <!-- Contenedor de la imagen completa con los botones encima -->
-    <div class="camino-imagen-fondo">
-      <img src="img/camino_completo.png" alt="Camino de niveles" class="img-camino-base">
-      <div class="path-container" id="caminoNiveles">
-            <a href="palabras_nv_1.html" class="node active" data-nivel="1">1</a>
-            <a href="palabras_nv_2.html" class="node locked" data-nivel="2">2</a>
-            <a href="palabras_nv_3.html" class="node locked" data-nivel="3">3</a>
-            <a href="palabras_nv_4.html" class="node locked" data-nivel="4">4</a>
-            <a href="palabras_nv_5.html" class="node locked" data-nivel="5">5</a>
-      </div>  
+      <h1 class="pa-titulo">Aprende palabras</h1>
+      <p class="pa-subtitulo">Conoce las palabras del día</p>
+      <p class="pa-mapa-actividad" id="pa-mapa-actividad">Ejercicios prácticos</p>
+      <p class="pa-mapa-ayuda">Completa un nivel para desbloquear el siguiente. <a href="palabrasActividad.html">Cambiar actividad</a></p>
+
+      <!-- Si el servidor no responde aparece este mensaje con "Reintentar" -->
+      <div id="pa-mapa-error" class="pa-tarjeta-aviso" role="alert" hidden>
+        <p id="pa-mapa-error-texto">No pudimos cargar tus niveles.</p>
+        <button type="button" id="pa-mapa-reintentar" class="pa-btn3d pa-c0">Reintentar</button>
+      </div>
+
+      <!-- Misma imagen y CSS del camino que Cuenta cuentos. Los niveles arrancan bloqueados;
+           palabrasModulo.js los abre según el avance guardado en la BD. -->
+      <div class="camino-imagen-fondo">
+        <img src="img/camino_completo.png" alt="Camino de niveles" class="img-camino-base">
+        <div class="path-container" id="caminoNiveles">
+          <a href="#" class="node locked" data-nivel="1" data-estado="bloqueado">1</a>
+          <a href="#" class="node locked" data-nivel="2" data-estado="bloqueado">2</a>
+          <a href="#" class="node locked" data-nivel="3" data-estado="bloqueado">3</a>
+          <a href="#" class="node locked" data-nivel="4" data-estado="bloqueado">4</a>
+          <a href="#" class="node locked" data-nivel="5" data-estado="bloqueado">5</a>
+        </div>
+      </div>
     </div>
   </main>
 
-  <!-- Botón de casa -->
-  <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
-    </svg>
-  </a>
+  <!-- Botones de navegación inferiores (Casita y Regresar) -->
+  <div class="navegacion-inferior">
+    <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <!-- Botón Regresar -->
+    <a href="javascript:history.back()" class="btn-regresar" aria-label="Regresar">
+      <svg viewBox="0 0 100 85" aria-hidden="true">
+        <path d="M 38 10 C 40 9, 42 10, 42 13 L 42 22 C 68 22, 84 40, 82 58 C 80 73, 60 80, 32 77
+                 C 53 75, 67 66, 68 54 C 69 42, 57 35, 42 35 L 42 44 C 42 47, 40 48, 38 47 L 12 31
+                 C 9 29.5, 9 27.5, 12 26 Z" fill="#fff" />
+      </svg>
+      <span>Regresar</span>
+    </a>
+  </div>
 
   <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
-  <script src="camino.js"></script>
+  <script src="palabrasModulo.js"></script>
 </body>
 </html>
