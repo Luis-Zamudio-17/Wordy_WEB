@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Cuenta cuentos - Niveles</title>
+  <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/cuentos.css">
+</head>
+<body class="paginas" data-requiere-sesion>
+
+  <!-- Menú (hamburguesa) -->
+  <button type="button" id="btnMenu" class="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+    <svg viewBox="0 0 34 34" aria-hidden="true">
+      <path d="M6 9h22M6 17h22M6 25h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
+    <a href="inicio.html">Inicio</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
+    <a href="aprendePalabras.html">Aprende Palabras</a>
+    <a href="controlParental.html">Control Parental</a>
+    <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
+  </nav>
+
+  <!-- Logo del gusano -->
+  <div class="logo">
+    <img src="img/wordy_logo.png" alt="Wordy">
+  </div>
+
+  <!-- Contenedor principal (misma estructura que palabrasSelecciona.html) -->
+  <main class="general mapa-contenedor">
+    <div id="cc-modulo" class="cc-modulo" data-vista="mapa">
+
+      <div id="cc-aviso" class="cc-aviso" role="status" aria-live="polite" hidden></div>
+    <a class="cc-regresar" href="Cuentos.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Regresar</span>
+    </a>
+
+      <h1 class="cc-titulo">Cuenta cuentos</h1>
+      <p class="cc-subtitulo">¡Enciende tus ojos y oídos de detective!</p>
+
+      <!-- Si el servidor no responde, aquí aparece el mensaje con el botón Reintentar -->
+      <div id="cc-mapa-error" class="cc-tarjeta-aviso" role="alert" hidden>
+        <p id="cc-mapa-error-texto">No pudimos cargar tus cuentos.</p>
+        <button type="button" id="cc-mapa-reintentar" class="cc-btn3d cc-btn-chico">Reintentar</button>
+      </div>
+
+      <p class="cc-ayuda-mapa" id="cc-ayuda-mapa">Completa cada cuento para desbloquear el siguiente.</p>
+
+      <!-- Misma estructura que Aprende palabras: toma el mismo CSS y la misma imagen del camino.
+           Los niveles arrancan bloqueados; cuentosModulo.js los abre según el avance guardado en la BD. -->
+      <div class="camino-imagen-fondo">
+        <img src="img/camino_completo.png" alt="Camino de niveles" class="img-camino-base">
+        <div class="path-container" id="caminoNiveles">
+          <a href="#" class="node locked" data-nivel="1" data-estado="bloqueado">1</a>
+          <a href="#" class="node locked" data-nivel="2" data-estado="bloqueado">2</a>
+          <a href="#" class="node locked" data-nivel="3" data-estado="bloqueado">3</a>
+          <a href="#" class="node locked" data-nivel="4" data-estado="bloqueado">4</a>
+          <a href="#" class="node locked" data-nivel="5" data-estado="bloqueado">5</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Botón de casa -->
+  <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+  <script src="cuentosModulo.js"></script>
+</body>
+</html>

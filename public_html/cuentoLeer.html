@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Cuenta cuentos</title>
+  <link rel="stylesheet" href="estilos/estilo.css">
+  <link rel="stylesheet" href="estilos/cuentos.css">
+</head>
+<body class="paginas" data-requiere-sesion>
+
+  <!-- Menú (hamburguesa) -->
+  <button type="button" id="btnMenu" class="btn-menu" aria-label="Abrir menú" aria-expanded="false">
+    <svg viewBox="0 0 34 34" aria-hidden="true">
+      <path d="M6 9h22M6 17h22M6 25h22" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <nav id="menuPanel" class="menu-panel" aria-label="Menú principal">
+    <a href="inicio.html">Inicio</a>
+    <a href="Cuentos.html">Cuenta cuentos</a>
+    <a href="aprendePalabras.html">Aprende Palabras</a>
+    <a href="controlParental.html">Control Parental</a>
+    <button type="button" id="menuCerrarSesion">Cerrar sesión</button>
+  </nav>
+
+  <!-- Logo del gusano -->
+  <div class="logo">
+    <img src="img/wordy_logo.png" alt="Wordy">
+  </div>
+
+  <main class="general">
+    <div id="cc-modulo" class="cc-modulo" data-vista="leer">
+
+      <div id="cc-aviso" class="cc-aviso" role="status" aria-live="polite" hidden></div>
+    <a class="cc-regresar" href="cuentosNiveles.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Regresar</span>
+    </a>
+
+      <!-- Mientras llega el cuento desde el servidor -->
+      <p id="cc-cargando" class="cc-subtitulo">Cargando tu cuento…</p>
+
+      <!-- Error (nivel bloqueado, sin contenido, servidor caído) -->
+      <div id="cc-error" class="cc-tarjeta-aviso" role="alert" hidden>
+        <p id="cc-error-texto">No se pudo cargar el cuento, intenta de nuevo.</p>
+        <a class="cc-btn3d cc-btn-chico" href="cuentosNiveles.html">Volver al mapa</a>
+      </div>
+
+      <!-- ====================== CUENTO (imágenes 10 y 11) ====================== -->
+      <div id="cc-lector" class="cc-lector" hidden>
+
+        <div class="cc-cabecera">
+          <button type="button" id="cc-play" class="cc-play" aria-label="Escuchar el cuento">
+            <svg class="cc-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#fff"/></svg>
+            <svg class="cc-ico-pausa" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="#fff"/></svg>
+          </button>
+
+          <div class="cc-titulos">
+            <h1 class="cc-titulo">Cuenta cuentos</h1>
+            <p class="cc-subtitulo" id="cc-subtitulo"></p>
+          </div>
+
+          <button type="button" id="cc-revisar" class="cc-revisar cc-deshabilitado" aria-label="Revisar" aria-disabled="true">
+            <span>Revisar</span>
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <polygon points="24.0,1.0 25.9,5.5 30.7,5.8 27.0,9.0 28.1,13.7 24.0,11.2 19.9,13.7 21.0,9.0 17.3,5.8 22.1,5.5" fill="#4F73C8"/>
+              <polygon points="9.0,9.5 10.5,13.0 14.2,13.3 11.4,15.8 12.2,19.4 9.0,17.5 5.8,19.4 6.6,15.8 3.8,13.3 7.5,13.0" fill="#4F73C8"/>
+              <polygon points="39.0,9.5 40.5,13.0 44.2,13.3 41.4,15.8 42.2,19.4 39.0,17.5 35.8,19.4 36.6,15.8 33.8,13.3 37.5,13.0" fill="#4F73C8"/>
+              <circle cx="24" cy="28" r="5.5" fill="#4F73C8"/>
+              <path d="M13 46c0-7.5 4.8-12 11-12s11 4.5 11 12z" fill="#4F73C8"/>
+            </svg>
+          </button>
+        </div>
+
+        <div id="cc-banner" class="cc-banner" role="alert" hidden></div>
+
+        <!-- ---------- FASE 1: escuchar y completar huecos ---------- -->
+        <div id="cc-fase-cuento" class="cc-fase-cuento">
+          <div class="cc-cuento-grid">
+            <article id="cc-texto" class="cc-texto" aria-label="Texto del cuento"></article>
+
+            <aside class="cc-derecha">
+              <!-- IMAGEN (la pones tú): url_ilustracion de la ESCENA 1 (tabla CUENTO_ESCENA).
+                   Las demás escenas pueden traer su propia ilustración. Ruta: img/cuentos/nivelN_escena1.png -->
+              <figure class="cc-escena" id="cc-escena">
+                <img id="cc-img" src="" alt="Ilustración del cuento">
+              </figure>
+              <div class="cc-opciones-card">
+                <p id="cc-frase" class="cc-frase-hueco" hidden></p>
+                <p id="cc-mensaje" class="cc-mensaje">Pulsa el botón naranja ▶ para escuchar el cuento. Cuando el audio se detenga, elige la palabra correcta.</p>
+                <div id="cc-opciones" class="cc-opciones"></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <!-- ---------- FASE 2: preguntas al terminar el cuento ---------- -->
+        <div id="cc-form-quiz" class="cc-fase-quiz" hidden>
+          <div class="cc-quiz-grid">
+            <div class="cc-quiz-card">
+              <div id="cc-quiz-lista"></div>
+              <p class="cc-quiz-ayuda">Cuando termines, pulsa <b>Revisar</b> (arriba a la derecha).</p>
+            </div>
+
+            <figure class="cc-quiz-figura">
+              <!-- IMAGEN (la pones tú): CUENTO.url_portada. Ruta: img/cuentos/nivelN_portada.png -->
+              <img id="cc-img-quiz" src="" alt="Ilustración del cuento">
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================== RESULTADO ====================== -->
+      <div id="cc-resultado-vista" hidden>
+        <div class="cc-cabecera cc-cabecera-simple">
+          <div class="cc-titulos">
+            <h1 class="cc-titulo">Cuenta cuentos</h1>
+            <p class="cc-subtitulo" id="cc-res-subtitulo"></p>
+          </div>
+        </div>
+
+        <section class="cc-resultado">
+          <div class="cc-resultado-card">
+            <div class="cc-estrellas" id="cc-res-estrellas" role="img"></div>
+            <h2 class="cc-res-titulo" id="cc-res-titulo"></h2>
+            <p class="cc-res-sub" id="cc-res-sub"></p>
+            <ul class="cc-res-lista" id="cc-res-lista"></ul>
+            <p class="cc-guardado" id="cc-res-guardado"></p>
+          </div>
+
+          <div class="cc-res-acciones" id="cc-res-acciones"></div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Botón de casa -->
+  <a href="inicio.html" class="btn-casa" aria-label="Ir al inicio">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M16 4 3 15h4v12h7v-8h4v8h7V15h4L16 4z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+  </a>
+
+  <div id="aviso" class="aviso" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+  <script src="cuentosModulo.js"></script>
+</body>
+</html>

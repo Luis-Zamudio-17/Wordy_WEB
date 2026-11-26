@@ -1,0 +1,14 @@
+AUDIOS DEL NIVEL 3 (Caperucita Roja): 6 archivos MP3 en esta carpeta.
+
+parte1.mp3
+parte2.mp3
+parte3.mp3
+parte4.mp3
+parte5.mp3
+parte6.mp3
+
+El texto exacto que debe decir cada uno aparece en:  https://wordy-api-marvin-athheedkfubbh8ez.mexicocentral-01.azurewebsites.net/api/cuentos/guion
+Del segundo audio en adelante, empieza diciendo la palabra correcta del hueco anterior.
+Si prefieren UN solo mp3 por cuento, vean la seccion "Audio" del LEEME.md (forma B).
+No hace falta tener los mp3 para probar: sin ellos suena la voz del navegador.
+Borra este LEEME.txt si quieres; no afecta al sistema.

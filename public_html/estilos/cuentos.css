@@ -1,0 +1,446 @@
+/* ======================================================================
+   cuentos.css  -  Modulo CUENTA CUENTOS (Wordy)
+   Ubicacion: Web Pages/estilos/cuentos.css   (junto a estilo.css)
+
+   TODO esta acotado a #cc-modulo: no toca header, nav, footer ni nada
+   fuera del section/main. Look and feel tomado de las imagenes 7 a 11:
+     - fondo crema (lo pone tu base), titulo azul marino muy grueso
+     - tarjeta amarilla de esquinas muy redondeadas con borde inferior grueso
+     - botones "3D" (color solido + sombra dura debajo): naranja, turquesa, morado, rosa
+   ====================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap');
+
+#cc-modulo {
+  --navy: #1F2A44;
+  --azul: #4F73C8;
+  --naranja: #FFA445;   --naranja-s: #D98A35;
+  --teal: #73CFC5;      --teal-s: #4BA79C;
+  --morado: #A29BFE;    --morado-s: #8077D6;
+  --rosa: #FF8FA9;      --rosa-s: #E06A88;
+  --amarillo: #FFE592;  --amarillo-b: #FFD65C;
+  --verde: #2FAE7B;
+  --rojo: #F0605D;
+
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+  color: var(--navy);
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 130px;       /* el espacio de abajo deja libre la ola azul del footer */
+  text-align: left;
+}
+#cc-modulo *, #cc-modulo *::before, #cc-modulo *::after { box-sizing: border-box; }
+#cc-modulo [hidden] { display: none !important; }
+#cc-modulo :focus-visible { outline: 4px solid var(--azul); outline-offset: 3px; }
+
+/* ------------------------------------------------------------ titulos */
+#cc-modulo .cc-titulo {
+  font-weight: 800;
+  font-size: clamp(2.3rem, 5.2vw, 3.8rem);
+  line-height: 1.05;
+  text-align: center;
+  margin: 0;
+  color: var(--navy);
+}
+#cc-modulo .cc-subtitulo {
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  text-align: center;
+  margin: 4px 0 0;
+  color: var(--navy);
+}
+
+/* ------------------------------------------------------- botones 3D */
+#cc-modulo .cc-btn3d {
+  --alto: 9px;
+  --sh: var(--naranja-s);
+  display: inline-block;
+  background: var(--naranja);
+  color: var(--navy);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.7rem;
+  text-decoration: none;
+  text-align: center;
+  padding: 20px 54px;
+  border: 0;
+  border-radius: 16px;
+  cursor: pointer;
+  box-shadow: 0 var(--alto) 0 var(--sh);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#cc-modulo .cc-btn3d:hover  { transform: translateY(2px); box-shadow: 0 calc(var(--alto) - 2px) 0 var(--sh); }
+#cc-modulo .cc-btn3d:active { transform: translateY(var(--alto)); box-shadow: 0 0 0 var(--sh); }
+#cc-modulo .cc-btn-chico   { --alto: 7px; font-size: 1.2rem; padding: 14px 34px; }
+#cc-modulo .cc-btn-teal    { background: var(--teal);   --sh: var(--teal-s); }
+#cc-modulo .cc-btn-morado  { background: var(--morado); --sh: var(--morado-s); }
+
+/* ============================================ PANTALLA: INSTRUCCIONES */
+#cc-modulo .cc-intro {
+  position: relative;
+  max-width: 1010px;
+  margin: 38px auto 120px;
+}
+#cc-modulo .cc-intro-card {
+  background: var(--amarillo);
+  border-radius: 60px;
+  border-bottom: 14px solid var(--amarillo-b);
+  padding: 40px 56px 118px;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+}
+#cc-modulo .cc-intro-card p { margin: 0 0 22px; }
+#cc-modulo .cc-intro-card p:last-child { margin-bottom: 0; }
+#cc-modulo .cc-intro-centro { text-align: center; }
+#cc-modulo .cc-btn-jugar { position: absolute; left: 22%; bottom: -66px; }
+#cc-modulo .cc-mascota   { position: absolute; left: 49%; bottom: -96px; width: 23%; max-width: 240px; height: auto; }
+
+/* ============================================ PANTALLA: MAPA */
+#cc-modulo .cc-ayuda-mapa {
+  text-align: center;
+  font-weight: 600;
+  margin: 14px 0 0;
+  color: #44506e;
+}
+/* Nivel completado: aro verde (no depende de como posicione tu CSS base los nodos) */
+#cc-modulo .node.done { box-shadow: 0 0 0 6px var(--verde), 0 0 0 10px rgba(47, 174, 123, .25); }
+
+/* ============================================ CABECERA DEL CUENTO */
+#cc-modulo .cc-cabecera {
+  display: grid;
+  grid-template-columns: 130px 1fr 150px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+#cc-modulo .cc-cabecera-simple { grid-template-columns: 1fr; }
+
+#cc-modulo .cc-play {
+  width: 80px; height: 54px;
+  border: 0;
+  border-radius: 30px;
+  background: #FFB35C;
+  display: grid; place-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #E09441;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#cc-modulo .cc-play:hover:not(:disabled)  { transform: translateY(2px); box-shadow: 0 3px 0 #E09441; }
+#cc-modulo .cc-play:disabled { opacity: .45; cursor: default; }
+#cc-modulo .cc-play svg { width: 30px; height: 30px; }
+#cc-modulo .cc-ico-pausa { display: none; }
+#cc-modulo .cc-play.cc-reproduciendo .cc-ico-play  { display: none; }
+#cc-modulo .cc-play.cc-reproduciendo .cc-ico-pausa { display: block; }
+#cc-modulo .cc-modo-quiz .cc-play { visibility: hidden; }
+
+#cc-modulo .cc-revisar {
+  justify-self: end;
+  display: flex; align-items: center; gap: 8px;
+  background: none; border: 0;
+  color: var(--azul);
+  font-family: inherit; font-weight: 800; font-size: 1.35rem;
+  cursor: pointer;
+}
+#cc-modulo .cc-revisar svg { width: 56px; height: 56px; }
+#cc-modulo .cc-deshabilitado { opacity: .45; }
+#cc-modulo .cc-pulso { animation: cc-pulso 1.4s ease-in-out infinite; }
+@keyframes cc-pulso { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+#cc-modulo .cc-banner {
+  max-width: 760px;
+  margin: 0 auto 22px;
+  background: #FFE3E0;
+  border: 3px solid var(--rojo);
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ============================================ FASE 1: TEXTO + HUECOS */
+#cc-modulo .cc-cuento-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+#cc-modulo .cc-texto {
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.9vw, 1.55rem);
+  line-height: 1.55;
+  text-align: justify;
+  hyphens: auto;
+}
+#cc-modulo .cc-seg {
+  border-radius: 8px;
+  padding: 2px 0;
+  transition: background .25s ease;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+#cc-modulo .cc-seg.cc-leyendo { background: var(--amarillo); }
+
+#cc-modulo .cc-hueco {
+  display: inline-block;
+  min-width: 3.4em;
+  padding: 0 .35em;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: .08em;
+  color: #7a84a3;
+}
+#cc-modulo .cc-hueco.activo {
+  background: var(--amarillo);
+  color: var(--navy);
+  outline: 3px dashed var(--naranja);
+  outline-offset: 2px;
+  animation: cc-parpadeo 1.2s ease-in-out infinite;
+}
+#cc-modulo .cc-hueco.resuelto {
+  min-width: 0;
+  letter-spacing: 0;
+  background: #DDF5EA;
+  color: #187150;
+  font-weight: 800;
+  animation: none;
+  outline: none;
+}
+@keyframes cc-parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+
+/* columna derecha: ilustracion + opciones (se queda a la vista mientras se lee) */
+#cc-modulo .cc-derecha { position: sticky; top: 16px; display: grid; gap: 22px; }
+#cc-modulo .cc-escena { margin: 0; }
+#cc-modulo .cc-escena img { display: block; width: 100%; height: auto; border-radius: 18px; }
+
+#cc-modulo .cc-img-faltante {
+  display: grid; justify-items: center; gap: 8px;
+  padding: 34px 16px;
+  border: 3px dashed #B9C3E0;
+  border-radius: 18px;
+  background: #fff;
+  color: #5a6688;
+  font-weight: 600;
+  text-align: center;
+}
+#cc-modulo .cc-img-faltante span { font-size: 2.4rem; }
+#cc-modulo .cc-img-faltante code { background: #EEF2FF; padding: 2px 6px; border-radius: 6px; word-break: break-all; }
+
+#cc-modulo .cc-opciones-card {
+  background: #fff;
+  border-radius: 26px;
+  padding: 22px 26px 26px;
+  box-shadow: 0 6px 18px rgba(31, 42, 68, .12);
+  display: grid; gap: 16px;
+}
+#cc-modulo .cc-mensaje { margin: 0; font-weight: 600; font-size: 1rem; line-height: 1.45; color: #44506e; }
+#cc-modulo .cc-mensaje-pregunta { font-weight: 800; color: var(--navy); }
+#cc-modulo .cc-mensaje-ok       { font-weight: 800; color: #187150; }
+#cc-modulo .cc-mensaje-error    { font-weight: 700; color: #b03a3a; }
+
+/* frase del hueco: "antes ____ despues" */
+#cc-modulo .cc-frase-hueco {
+  background: var(--amarillo);
+  border-radius: 18px;
+  padding: 12px 16px;
+  margin: 0 0 14px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+#cc-modulo .cc-blanco {
+  display: inline-block;
+  min-width: 3.6em;
+  border-bottom: 5px solid var(--naranja);
+  color: transparent;
+  text-align: center;
+  padding: 0 6px;
+}
+#cc-modulo .cc-blanco.resuelto { color: var(--navy); border-bottom-color: var(--verde); }
+
+#cc-modulo .cc-opciones { display: grid; gap: 14px; }
+#cc-modulo .cc-op {
+  --sh: var(--naranja-s);
+  display: flex; align-items: center; gap: 16px;
+  width: 100%;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--naranja);
+  color: var(--navy);
+  font-family: inherit; font-weight: 700; font-size: 1.3rem;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--sh);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#cc-modulo .cc-op-1 { background: var(--teal);   --sh: var(--teal-s); }
+#cc-modulo .cc-op-2 { background: var(--morado); --sh: var(--morado-s); }
+#cc-modulo .cc-op-3 { background: var(--rosa);   --sh: var(--rosa-s); }
+#cc-modulo .cc-op:hover:not(:disabled)  { transform: translateY(2px); box-shadow: 0 4px 0 var(--sh); }
+#cc-modulo .cc-op:active:not(:disabled) { transform: translateY(6px); box-shadow: 0 0 0 var(--sh); }
+#cc-modulo .cc-op:disabled { cursor: not-allowed; opacity: .75; }
+#cc-modulo .cc-op.incorrecta {
+  background: #E7E9F0; color: #8a93ab;
+  --sh: #C9CEDD;
+  text-decoration: line-through;
+  opacity: 1;
+  animation: cc-sacudida .35s ease;
+}
+@keyframes cc-sacudida { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+/* ============================================ FASE 2: TRIVIA */
+#cc-modulo .cc-quiz-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .9fr);
+  gap: 30px;
+  align-items: center;
+}
+#cc-modulo .cc-quiz-card {
+  background: #fff;
+  border-radius: 30px;
+  padding: 30px 38px 26px;
+  box-shadow: 0 12px 0 #DADDE4;
+  display: grid; gap: 22px;
+}
+#cc-modulo .cc-pregunta { padding: 6px 8px; border-radius: 16px; }
+#cc-modulo .cc-sin-responder { outline: 3px dashed var(--rojo); outline-offset: 4px; }
+#cc-modulo .cc-pregunta-t { margin: 0 0 12px; font-weight: 800; font-size: 1.15rem; }
+#cc-modulo .cc-pregunta-ops { display: flex; flex-wrap: wrap; gap: 14px; }
+
+#cc-modulo .cc-quiz-op { position: relative; --sh: var(--naranja-s); cursor: pointer; }
+#cc-modulo .cc-quiz-op input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+#cc-modulo .cc-quiz-op span {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 8px;
+  background: var(--naranja);
+  font-weight: 700; font-size: 1.05rem;
+  box-shadow: 0 5px 0 var(--sh);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#cc-modulo .cc-c1 { --sh: var(--teal-s); }
+#cc-modulo .cc-c1 span { background: var(--teal); }
+#cc-modulo .cc-c2 { --sh: var(--morado-s); }
+#cc-modulo .cc-c2 span { background: var(--morado); }
+#cc-modulo .cc-quiz-op:hover span { transform: translateY(2px); box-shadow: 0 3px 0 var(--sh); }
+#cc-modulo .cc-quiz-op input:checked + span {
+  outline: 4px solid var(--navy);
+  outline-offset: 2px;
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--sh);
+}
+#cc-modulo .cc-quiz-op input:focus-visible + span { outline: 4px solid var(--azul); outline-offset: 3px; }
+#cc-modulo .cc-quiz-ayuda { margin: 0; font-weight: 600; font-size: .95rem; color: #5b6784; }
+#cc-modulo .cc-quiz-figura { margin: 0; }
+#cc-modulo .cc-quiz-figura img { display: block; width: 100%; height: auto; border-radius: 20px; }
+
+/* ============================================ RESULTADO / AVISOS */
+#cc-modulo .cc-resultado { max-width: 860px; margin: 30px auto 0; display: grid; gap: 34px; }
+#cc-modulo .cc-resultado-card {
+  background: var(--amarillo);
+  border-radius: 48px;
+  border-bottom: 12px solid var(--amarillo-b);
+  padding: 32px 44px 36px;
+}
+#cc-modulo .cc-estrellas { text-align: center; font-size: 3.2rem; letter-spacing: .15em; line-height: 1; }
+#cc-modulo .cc-estrella { color: #EFDFA6; }
+#cc-modulo .cc-estrella.llena { color: #FFB000; text-shadow: 0 3px 0 var(--naranja-s); }
+#cc-modulo .cc-res-titulo { text-align: center; font-weight: 800; font-size: 1.8rem; margin: 10px 0 6px; }
+#cc-modulo .cc-res-sub { text-align: center; font-weight: 600; margin: 0 0 22px; }
+#cc-modulo .cc-res-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+#cc-modulo .cc-res-lista li {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #fff; border-radius: 18px;
+  padding: 12px 18px;
+  font-weight: 600; line-height: 1.45;
+}
+#cc-modulo .cc-res-icono {
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  color: #fff; font-weight: 800;
+}
+#cc-modulo .cc-res-lista .ok  .cc-res-icono { background: var(--verde); }
+#cc-modulo .cc-res-lista .mal .cc-res-icono { background: var(--rojo); }
+#cc-modulo .cc-guardado { text-align: center; font-weight: 700; color: #187150; margin: 18px 0 0; }
+#cc-modulo .cc-res-acciones { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+
+#cc-modulo .cc-tarjeta-aviso {
+  max-width: 620px;
+  margin: 40px auto;
+  background: var(--amarillo);
+  border-radius: 40px;
+  border-bottom: 10px solid var(--amarillo-b);
+  padding: 32px;
+  text-align: center;
+  font-weight: 700; font-size: 1.2rem;
+  display: grid; gap: 22px; justify-items: center;
+}
+#cc-modulo .cc-tarjeta-aviso p { margin: 0; }
+
+/* mensaje flotante (audio, imagen, validaciones) */
+#cc-modulo .cc-aviso {
+  position: fixed;
+  left: 50%; bottom: 120px;
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: min(560px, 92vw);
+  padding: 12px 22px;
+  border-radius: 18px;
+  font-weight: 700; text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(31, 42, 68, .3);
+}
+#cc-modulo .cc-aviso-info  { background: var(--navy); }
+#cc-modulo .cc-aviso-error { background: var(--rojo); }
+#cc-modulo .cc-aviso-ok    { background: var(--verde); }
+
+/* boton "Regresar": se coloca sobre la ola azul del footer, junto al boton de casa.
+   Si en tu base la casa esta en otro lugar, ajusta left / bottom. */
+#cc-modulo .cc-regresar {
+  position: fixed;
+  left: 108px; bottom: 10px;
+  z-index: 30;
+  display: flex; flex-direction: column; align-items: center;
+  color: #fff; text-decoration: none;
+  font-weight: 800; font-size: .72rem;
+}
+#cc-modulo .cc-regresar svg { width: 38px; height: 38px; }
+
+/* ============================================ AYUDA: guion de audios (dev) */
+#cc-modulo .cc-guion { max-width: 1000px; margin: 20px auto; background: #fff; border-radius: 20px; padding: 24px 30px; font-size: .95rem; line-height: 1.5; }
+#cc-modulo .cc-guion h2 { margin: 26px 0 8px; font-size: 1.2rem; }
+#cc-modulo .cc-guion table { width: 100%; border-collapse: collapse; }
+#cc-modulo .cc-guion th, #cc-modulo .cc-guion td { border: 1px solid #E1E5F0; padding: 8px 10px; text-align: left; vertical-align: top; }
+#cc-modulo .cc-guion th { background: #EEF2FF; }
+#cc-modulo .cc-guion code { background: #EEF2FF; padding: 2px 6px; border-radius: 6px; word-break: break-all; }
+
+/* ============================================ RESPONSIVO */
+@media (max-width: 900px) {
+  #cc-modulo { padding: 0 18px 130px; }
+  #cc-modulo .cc-cabecera { grid-template-columns: 96px 1fr 104px; }
+  #cc-modulo .cc-play { width: 68px; height: 48px; }
+  #cc-modulo .cc-revisar { font-size: 1.05rem; flex-direction: column-reverse; gap: 0; }
+  #cc-modulo .cc-revisar svg { width: 44px; height: 44px; }
+  #cc-modulo .cc-cuento-grid, #cc-modulo .cc-quiz-grid { grid-template-columns: 1fr; gap: 26px; }
+  #cc-modulo .cc-derecha { position: static; }
+  #cc-modulo .cc-quiz-figura { order: -1; max-width: 360px; margin: 0 auto; }
+}
+@media (max-width: 640px) {
+  #cc-modulo .cc-intro { display: flex; flex-direction: column; align-items: center; gap: 22px; margin-bottom: 40px; }
+  #cc-modulo .cc-intro-card { padding: 28px 24px; border-radius: 40px; }
+  #cc-modulo .cc-btn-jugar, #cc-modulo .cc-mascota { position: static; }
+  #cc-modulo .cc-btn3d { font-size: 1.3rem; padding: 16px 38px; }
+  #cc-modulo .cc-quiz-card { padding: 22px 20px; }
+  #cc-modulo .cc-resultado-card { padding: 26px 20px 30px; border-radius: 36px; }
+  #cc-modulo .cc-regresar { left: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cc-modulo *, #cc-modulo *::before, #cc-modulo *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

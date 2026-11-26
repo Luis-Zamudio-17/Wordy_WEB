@@ -1,0 +1,20 @@
+IMAGENES QUE DEBES PONER AQUI (ruta: Web Pages/img/cuentos/)
+Formato PNG o JPG. Las rutas salen de la BD: si usas otro nombre, cambialo en
+CUENTO.url_portada o CUENTO_ESCENA.url_ilustracion (UPDATE en SSMS), no en el codigo.
+
+nivelN_escena1.png  -> CUENTO_ESCENA.url_ilustracion de la ESCENA 1 (imagen 10 del look and feel). ~800 px de ancho.
+                       Las demas escenas traen url_ilustracion NULL y conservan la imagen anterior.
+                       Si quieres una imagen distinta por escena: UPDATE CUENTO_ESCENA SET url_ilustracion = N'img/cuentos/...' WHERE ...
+nivelN_portada.png  -> CUENTO.url_portada, ilustracion junto a la trivia (imagen 11). ~600 px de ancho.
+
+Nivel 1 (Los Tres Cerditos): nivel1_escena1.png , nivel1_portada.png
+Nivel 2 (Ricitos de Oro):    nivel2_escena1.png , nivel2_portada.png
+Nivel 3 (Caperucita Roja):   nivel3_escena1.png , nivel3_portada.png
+Nivel 4 (El Patito Feo):     nivel4_escena1.png , nivel4_portada.png
+Nivel 5 (Pinocho):           nivel5_escena1.png , nivel5_portada.png
+
+FUERA de esta carpeta (Web Pages/img/):
+  gusano_lector.png   mascota de la pantalla de instrucciones (imagen 7)
+  camino_completo.png el camino de niveles (ya lo tienen de Aprende palabras)
+
+Si falta una imagen, la pagina muestra un recuadro que dice que archivo poner (no se rompe).
