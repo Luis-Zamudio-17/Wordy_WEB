@@ -1,1 +1,215 @@
-body.pagina-avalamiento{display:block;overflow-x:hidden;background:#fff8ec;padding:0;color:#1f2a4d}.av-header{height:78px;background:#4b76c8;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,70px);position:relative;z-index:2;box-shadow:0 3px 12px #1f2a4d18}.av-logo img{width:112px;max-height:62px;object-fit:contain}.av-header nav{display:flex;align-items:center;gap:22px}.av-header nav a,.av-salir{color:white;text-decoration:none;font:600 14px Poppins,sans-serif}.av-salir{background:#f16c58;border:0;border-radius:20px;padding:10px 18px;cursor:pointer}.av-main{width:min(1050px,92%);margin:38px auto 60px;position:relative;z-index:1}.av-intro{text-align:center;margin:10px auto 30px;max-width:720px}.av-etiqueta{font-size:11px;font-weight:700;letter-spacing:2px;color:#d96a39}.av-intro h1{font:700 clamp(34px,5vw,48px) Fredoka,Poppins,sans-serif;margin:8px 0;color:#315ca9}.av-intro p{font-size:15px;line-height:1.7}.av-mensaje{padding:12px 16px;background:#eaf2ff;border-radius:12px;margin:18px 0;color:#315ca9}.av-panel{background:white;border:1px solid #e9e5dc;border-radius:20px;padding:24px 28px;margin:18px 0;box-shadow:0 8px 24px #26385a0a}.av-panel-titulo,.av-panel-titulo>div,.av-subtitulo{display:flex;align-items:center;justify-content:space-between;gap:12px}.av-panel-titulo h2{font:700 21px Fredoka,Poppins,sans-serif}.av-icono{font-size:24px;margin-right:10px}.av-sello{background:#fff0c5;color:#9a6a00;border-radius:20px;padding:6px 13px;font-size:12px;font-weight:700}.av-texto{white-space:pre-wrap;line-height:1.8;margin-top:18px;font-size:14px}.av-fuentes{display:grid;gap:12px;margin-top:18px}.av-fuente{padding:15px 17px;border-radius:13px;background:#f7f9ff;border-left:4px solid #4b76c8}.av-fuente strong{display:block;margin-bottom:5px}.av-fuente p{font-size:13px;line-height:1.6}.av-fuente a{color:#315ca9;overflow-wrap:anywhere}.av-admin label{display:block;font-size:13px;font-weight:600;margin:14px 0}.av-admin textarea,.av-admin input{display:block;width:100%;border:1px solid #d8dfed;border-radius:10px;padding:12px;margin-top:7px;font:14px Poppins,sans-serif;color:#1f2a4d;background:#fffdf9}.av-primario,.av-secundario,.av-tabs button,.av-accion{border:0;border-radius:11px;padding:11px 17px;font:600 13px Poppins,sans-serif;cursor:pointer}.av-primario{background:#4b76c8;color:white;margin-top:14px}.av-secundario{background:#fff0c5;color:#785300}.av-subtitulo{margin:20px 0 8px}.av-fuente-edit{display:grid;grid-template-columns:2fr 1fr 100px 2fr auto;gap:8px;align-items:center;margin:10px 0}.av-fuente-edit input{min-width:0}.av-tabs{display:flex;gap:8px;margin:18px 0}.av-tabs button{background:#eef2fa;color:#31507f}.av-tabs button.activo{background:#4b76c8;color:white}.av-lista{display:grid;gap:10px}.av-item{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px;background:#f8f9fc;border-radius:12px}.av-item small{display:block;color:#6d7890}.av-accion{background:#ffe594;color:#554000}.av-detalle{margin-top:18px;padding:18px;background:#fff9e9;border-radius:14px}.av-checks{display:grid;gap:10px;margin:14px 0}.av-checks label{display:flex;align-items:center;gap:9px;font-weight:500}.av-checks input{width:auto;margin:0}.av-pie{text-align:center;color:#7d87a0;font-size:12px;margin:35px 0}.av-admin[hidden]{display:none!important}@media(max-width:720px){.av-header{height:auto;padding:12px 16px;align-items:flex-start}.av-header nav{gap:9px;flex-wrap:wrap;justify-content:flex-end}.av-header nav a,.av-salir{font-size:11px}.av-logo img{width:85px}.av-panel{padding:19px 16px}.av-fuente-edit{grid-template-columns:1fr 1fr}.av-fuente-edit input:first-child,.av-fuente-edit input:nth-child(4){grid-column:span 2}.av-item{align-items:flex-start;flex-direction:column}}
+/* ==========================================================
+   WORDY · AVALAMIENTO
+   Apariencia alineada con el diseño visual del sitio Wordy:
+   fondo crema, ondas azules, logo centrado, títulos Fredoka,
+   tarjetas claras redondeadas y acentos pastel.
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+body.pagina-avalamiento {
+  --av-azul: #4b76c8;
+  --av-crema: #fff8ec;
+  --av-navy: #1f2a4d;
+  --av-amarillo: #ffe594;
+  --av-amarillo-sombra: #ffd65c;
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 0 0 90px;
+  color: var(--av-navy);
+  background: var(--av-crema);
+  font-family: 'Poppins', sans-serif;
+}
+
+.pagina-avalamiento::before,
+.pagina-avalamiento::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  width: 100%;
+  height: 118px;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.pagina-avalamiento::before {
+  top: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%234b76c8' d='M0 0H1440V58C1300 15 1190 18 1060 62C930 106 810 115 690 73C560 27 460 24 340 70C220 116 110 116 0 58Z'/%3E%3C/svg%3E");
+}
+.pagina-avalamiento::after {
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%234b76c8' d='M0 120H1440V62C1300 105 1190 102 1060 58C930 14 810 5 690 47C560 93 460 96 340 50C220 4 110 4 0 62Z'/%3E%3C/svg%3E");
+}
+
+.av-header {
+  position: relative;
+  z-index: 2;
+  height: 112px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 16px clamp(18px, 4vw, 54px);
+  background: transparent;
+  box-shadow: none;
+}
+.av-logo {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 0;
+}
+.av-logo img { width: 150px; max-height: 76px; object-fit: contain; }
+.av-header nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2px;
+}
+.av-header nav a,
+.av-salir {
+  color: #fff;
+  text-decoration: none;
+  font: 600 13px 'Poppins', sans-serif;
+  border: 0;
+  border-radius: 22px;
+  padding: 9px 14px;
+  background: rgba(31,42,77,.16);
+  cursor: pointer;
+  transition: background .15s, transform .15s;
+}
+.av-header nav a:hover,
+.av-salir:hover { background: rgba(31,42,77,.3); transform: translateY(-1px); }
+.av-salir { background: #f16c58; }
+
+.av-main {
+  position: relative;
+  z-index: 1;
+  width: min(1320px, 94%);
+  margin: 8px auto 0;
+  padding: 0 0 45px;
+}
+.av-intro { text-align: center; margin: 12px auto 24px; max-width: 780px; }
+.av-etiqueta {
+  display: inline-block;
+  margin-bottom: 5px;
+  color: #d96a39;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+.av-intro h1 {
+  margin: 0;
+  color: var(--av-navy);
+  font: 700 clamp(38px, 5vw, 58px)/1.08 'Fredoka', sans-serif;
+}
+.av-intro p { margin: 7px 0 0; font-size: clamp(13px, 1.5vw, 17px); font-weight: 700; line-height: 1.5; }
+
+.av-mensaje {
+  max-width: 850px;
+  margin: 18px auto;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: #e8f1ff;
+  color: #315ca9;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+.av-panel {
+  margin: 18px 0;
+  padding: 22px 26px;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 9px 0 #dedede;
+}
+.av-panel-titulo,
+.av-panel-titulo > div,
+.av-subtitulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.av-panel-titulo h2 { margin: 0; font: 700 22px 'Fredoka', sans-serif; }
+.av-icono { margin-right: 8px; font-size: 22px; }
+.av-sello {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #fff0c5;
+  color: #9a6a00;
+  font-size: 11px;
+  font-weight: 800;
+}
+.av-texto { margin-top: 14px; white-space: pre-wrap; font-size: 14px; line-height: 1.8; }
+.av-fuentes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 17px; }
+.av-fuente { padding: 16px; border: 0; border-radius: 16px; background: #f7f8fc; box-shadow: 0 5px 0 #e2e3e8; }
+.av-fuente strong { display: block; margin-bottom: 5px; font: 700 17px 'Fredoka', sans-serif; }
+.av-fuente p { font-size: 13px; line-height: 1.6; }
+.av-fuente a { color: #315ca9; overflow-wrap: anywhere; font-weight: 600; }
+
+.av-admin label { display: block; margin: 14px 0; font-size: 13px; font-weight: 700; }
+.av-admin textarea,
+.av-admin input {
+  display: block;
+  width: 100%;
+  margin-top: 7px;
+  padding: 12px 14px;
+  border: 2px solid #eee6d7;
+  border-radius: 12px;
+  background: #fffdf8;
+  color: var(--av-navy);
+  font: 14px 'Poppins', sans-serif;
+}
+.av-admin textarea:focus,
+.av-admin input:focus { outline: 3px solid #4b76c833; border-color: var(--av-azul); }
+.av-primario,
+.av-secundario,
+.av-tabs button,
+.av-accion {
+  border: 0;
+  border-radius: 12px;
+  padding: 11px 17px;
+  font: 700 13px 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: transform .12s, filter .12s;
+}
+.av-primario { margin-top: 14px; background: #4b76c8; color: #fff; box-shadow: 0 5px 0 #315ca9; }
+.av-secundario { background: #ffe594; color: #554000; box-shadow: 0 5px 0 #ffd65c; }
+.av-tabs { display: flex; flex-wrap: wrap; gap: 9px; margin: 18px 0; }
+.av-tabs button { background: #eef2fa; color: #31507f; }
+.av-tabs button.activo { background: #4b76c8; color: #fff; }
+.av-lista { display: grid; gap: 12px; }
+.av-item { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 15px 17px; border-radius: 14px; background: #f7f8fc; }
+.av-item small { display: block; color: #6d7890; }
+.av-accion { background: #ffe594; color: #554000; }
+.av-detalle { margin-top: 18px; padding: 18px; border-radius: 15px; background: #fff8e6; }
+.av-checks { display: grid; gap: 10px; margin: 14px 0; }
+.av-checks label { display: flex; align-items: center; gap: 9px; font-weight: 500; }
+.av-checks input { width: auto; margin: 0; }
+.av-primario:hover,
+.av-secundario:hover,
+.av-tabs button:hover,
+.av-accion:hover { filter: brightness(1.04); transform: translateY(-2px); }
+.av-pie { margin: 32px 0 0; color: #7d87a0; text-align: center; font-size: 12px; }
+.av-admin[hidden] { display: none !important; }
+
+@media (max-width: 720px) {
+  .av-header { height: 108px; padding: 76px 12px 8px; justify-content: center; }
+  .av-logo { top: 8px; }
+  .av-logo img { width: 118px; max-height: 60px; }
+  .av-header nav { gap: 5px; padding: 0; }
+  .av-header nav a, .av-salir { padding: 7px 10px; font-size: 10px; }
+  .av-main { width: 92%; margin-top: 0; }
+  .av-intro { margin-top: 5px; }
+  .av-panel { padding: 18px 16px; }
+  .av-panel-titulo h2 { font-size: 19px; }
+  .av-fuente-edit { grid-template-columns: 1fr 1fr; }
+  .av-fuente-edit input:first-child,
+  .av-fuente-edit input:nth-child(4) { grid-column: span 2; }
+  .av-item { align-items: flex-start; flex-direction: column; }
+}
