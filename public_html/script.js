@@ -166,15 +166,29 @@ function iniciarFormulario(form) {
 
     // REGISTRO
     if (form.id === 'formRegistro') {
+      const botonRegistro = document.querySelector('button[form="formRegistro"]');
+      const usuario = form.querySelector('[name="usuario"]')?.value.trim() || '';
+      const nombreCampo = form.querySelector('[name="nombre"]'); // El formulario actual no solicita nombre.
+      const correo = form.querySelector('[name="correo"]')?.value.trim() || '';
+
       mensaje.className = 'mensaje ok';
       mensaje.textContent = 'Creando cuenta...';
+      if (botonRegistro) {
+        botonRegistro.disabled = true;
+        botonRegistro.textContent = 'Creando cuenta...';
+      }
 
       const datos = {
-        nombre: form.querySelector('[name="nombre"]').value.trim(),
-        usuario: form.querySelector('[name="usuario"]').value.trim(),
-        contrasena: form.querySelector('[name="contrasena"]').value,
-        tipo_cuenta: form.querySelector('[name="tipo_cuenta"]').value
+        // Si no existe campo nombre, el backend también puede usar el usuario como nombre.
+        nombre: nombreCampo?.value.trim() || usuario,
+        correo,
+        usuario,
+        contrasena: form.querySelector('[name="contrasena"]')?.value || '',
+        tipo_cuenta: form.querySelector('[name="tipo_cuenta"]')?.value || ''
       };
+
+      const controlador = new AbortController();
+      const temporizador = setTimeout(() => controlador.abort(), 25000);
 
       try {
         const response = await fetch(`${API_BASE}/registro`, {
@@ -182,21 +196,26 @@ function iniciarFormulario(form) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(datos)
+          body: JSON.stringify(datos),
+          signal: controlador.signal
         });
 
-        const result = await response.json();
+        const textoRespuesta = await response.text();
+        let result = {};
+        try {
+          result = textoRespuesta ? JSON.parse(textoRespuesta) : {};
+        } catch (_) {
+          throw new Error(`El servidor respondió con un formato inesperado (HTTP ${response.status}).`);
+        }
 
         if (!response.ok || !result.ok) {
           mensaje.className = 'mensaje error';
-          mensaje.textContent =
-            result.error || 'No se pudo registrar la cuenta.';
+          mensaje.textContent = result.error || `No se pudo registrar la cuenta (HTTP ${response.status}).`;
           return;
         }
 
         mensaje.className = 'mensaje ok';
-        mensaje.textContent =
-          '✔ Cuenta creada. Redirigiendo al login...';
+        mensaje.textContent = '✔ Cuenta creada. Redirigiendo al login...';
 
         setTimeout(() => {
           window.location.href = 'index.html';
@@ -204,10 +223,16 @@ function iniciarFormulario(form) {
 
       } catch (error) {
         console.error('Error en registro:', error);
-
         mensaje.className = 'mensaje error';
-        mensaje.textContent =
-          'No se pudo conectar con Wordy. Revisa tu conexión o la configuración CORS de la API.';
+        mensaje.textContent = error.name === 'AbortError'
+          ? 'La solicitud tardó demasiado. El servidor no respondió; inténtalo de nuevo.'
+          : (error.message || 'No se pudo conectar con Wordy. Revisa tu conexión o la configuración CORS de la API.');
+      } finally {
+        clearTimeout(temporizador);
+        if (botonRegistro && !mensaje.textContent.includes('Cuenta creada')) {
+          botonRegistro.disabled = false;
+          botonRegistro.textContent = 'Registrar';
+        }
       }
     }
   });
