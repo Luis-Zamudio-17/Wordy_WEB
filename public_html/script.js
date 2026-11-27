@@ -127,7 +127,7 @@ function iniciarFormulario(form) {
         }
 
         const tipoSeleccionado = form.querySelector('[name="tipo_cuenta"]').value;
-        const rolEsperado = ({ estudiante: 3, tutor: 1, psicopedagogo: 4, docente: 4 })[tipoSeleccionado];
+        const rolEsperado = ({ estudiante: 3, tutor: 1, psicopedagogo: 4, administrador: 2 })[tipoSeleccionado];
         if (rolEsperado && Number(result.id_rol) !== rolEsperado) {
           mensaje.className = 'mensaje error';
           mensaje.textContent = 'El tipo de cuenta seleccionado no coincide con el perfil registrado.';
@@ -150,7 +150,8 @@ function iniciarFormulario(form) {
         mensaje.className = 'mensaje ok';
         mensaje.textContent = '✔ Entrando...';
 
-        window.location.href = 'inicio.html';
+        const destinos = { 1: 'controlParental.html', 2: 'administrador.html', 3: 'inicio.html', 4: 'avalamiento.html' };
+        window.location.href = destinos[Number(result.id_rol)] || 'index.html';
 
       } catch (error) {
         console.error('Error en login:', error);

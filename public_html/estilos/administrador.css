@@ -1,0 +1,19 @@
+
+.pagina-administrador { justify-content: center; }
+.admin-contenedor {
+  position: relative; z-index: 1; width: min(90%, 680px); margin: 150px auto 120px;
+  padding: clamp(30px, 6vw, 58px); text-align: center; background: #fff;
+  border-radius: 38px; border-bottom: 12px solid #dedede;
+  box-shadow: 0 8px 0 rgba(31,42,77,.05);
+}
+.admin-icono {
+  display: grid; place-items: center; width: 82px; height: 82px; margin: 0 auto 18px;
+  border-radius: 50%; background: #ffe594; color: #ffa64a; font-size: 48px;
+  box-shadow: 0 6px 0 #ffd75e;
+}
+.admin-etiqueta { color: #4b76c8; font-size: .78rem; font-weight: 700; letter-spacing: .12em; }
+.admin-contenedor h1 { margin: 10px 0 18px; font-family: 'Fredoka', sans-serif; font-size: clamp(2.4rem, 6vw, 3.5rem); color: #1f2a4d; }
+.admin-mensaje { max-width: 490px; margin: 0 auto 12px; font-size: 1.08rem; font-weight: 600; line-height: 1.7; }
+.admin-gracias { margin-bottom: 28px; color: #4b76c8; font-weight: 600; }
+.admin-contenedor .btn { min-width: 190px; cursor: pointer; border: 0; }
+@media (max-width: 600px) { .admin-contenedor { margin-top: 125px; padding: 30px 22px; border-radius: 28px; } }
