@@ -99,13 +99,26 @@ function guardarProgreso(usuario, progreso) {
   } catch (e) { /* sin almacenamiento disponible */ }
 }
 
+/* ----------------------------------------------------------
+   API (misma que usa la app Android): /api/nino/resumen y /api/nino/dia
+   leen y guardan la racha y las estrellas en WordyDB (PERFIL_NINO), así
+   lo que el niño juegue en el celular se ve aquí y al revés.
+   Si la API no responde, se usa el respaldo local de siempre.
+   ---------------------------------------------------------- */
+const API_NINO = (window.WORDY_API_BASE ||
+  'https://wordy-api-marvin-athheedkfubbh8ez.mexicocentral-01.azurewebsites.net/api') + '/nino';
+
 /* Devuelve { usuario, racha, estrellas } */
 async function obtenerDatosUsuario() {
-  // Con base de datos:
-  //   const r = await fetch('php/datos_usuario.php');
-  //   const { dias_jugados, estrellas } = await r.json();
-  //   (dias_jugados: lista de fechas 'AAAA-MM-DD' de la tabla dias_jugados)
   const sesion = obtenerSesion();
+  try {
+    const r = await fetch(API_NINO + '/resumen?idUsuario=' + encodeURIComponent(sesion.id_usuario)
+      + '&hoy=' + fechaLocal());
+    const d = await r.json();
+    if (r.ok && d.ok) {
+      return { usuario: sesion.usuario, racha: d.racha || 0, estrellas: d.estrellas || 0 };
+    }
+  } catch (e) { /* sin conexión: respaldo local */ }
   const progreso = leerProgreso(sesion.usuario);
   return {
     usuario: sesion.usuario,
@@ -116,15 +129,21 @@ async function obtenerDatosUsuario() {
 
 /* Marca HOY como día jugado (si ya estaba, no lo duplica) y devuelve la racha nueva */
 async function registrarDiaJugado() {
-  // Con base de datos:
-  //   await fetch('php/registrar_dia.php', { method: 'POST' });
-  //   SQL: INSERT IGNORE INTO dias_jugados (usuario_id, fecha) VALUES (?, CURDATE());
-  //   (con una llave única en usuario_id + fecha para que no se repita el día)
   const sesion = obtenerSesion();
+  // respaldo local (por si no hay conexión)
   const progreso = leerProgreso(sesion.usuario);
   const hoy = fechaLocal();
   if (!progreso.dias.includes(hoy)) progreso.dias.push(hoy);
   guardarProgreso(sesion.usuario, progreso);
+  try {
+    const r = await fetch(API_NINO + '/dia', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idUsuario: sesion.id_usuario, hoy: hoy })
+    });
+    const d = await r.json();
+    if (r.ok && d.ok && d.perfilNino) return d.racha;
+  } catch (e) { /* sin conexión: respaldo local */ }
   return calcularRacha(progreso.dias);
 }
 
