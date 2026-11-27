@@ -126,6 +126,14 @@ function iniciarFormulario(form) {
           return;
         }
 
+        const tipoSeleccionado = form.querySelector('[name="tipo_cuenta"]').value;
+        const rolEsperado = ({ estudiante: 3, tutor: 1, psicopedagogo: 4, docente: 4 })[tipoSeleccionado];
+        if (rolEsperado && Number(result.id_rol) !== rolEsperado) {
+          mensaje.className = 'mensaje error';
+          mensaje.textContent = 'El tipo de cuenta seleccionado no coincide con el perfil registrado.';
+          return;
+        }
+
         // Guardar sesión
         const tipoCuenta = form.querySelector('[name="tipo_cuenta"]');
 

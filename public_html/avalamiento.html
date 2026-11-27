@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordy | Avalamiento</title>
+  <link rel="stylesheet" href="estilos/estilo.css"><link rel="stylesheet" href="estilos/avalamiento.css">
+</head>
+<body class="pagina-avalamiento" data-requiere-sesion>
+  <header class="av-header"><a href="inicio.html" class="av-logo"><img src="img/wordy_logo.png" alt="Wordy"></a><nav><a href="inicio.html">Inicio</a><a href="controlParental.html" id="av-control">Control parental</a><button id="av-salir" class="av-salir">Cerrar sesión</button></nav></header>
+  <main class="av-main">
+    <section class="av-intro"><span class="av-etiqueta">CONFIANZA Y APRENDIZAJE</span><h1>Avalamiento</h1><p>Conoce el propósito educativo de Wordy y las fuentes que respaldan sus actividades.</p></section>
+    <div id="av-mensaje" class="av-mensaje" role="status" aria-live="polite">Cargando información académica...</div>
+    <section class="av-panel"><div class="av-panel-titulo"><div><span class="av-icono">✦</span><h2>Finalidad educativa</h2></div><span class="av-sello">Wordy</span></div><p id="av-finalidad" class="av-texto">Cargando...</p></section>
+    <section class="av-panel"><div class="av-panel-titulo"><div><span class="av-icono">📚</span><h2>Estudios y fundamentos</h2></div></div><p id="av-estudios" class="av-texto">Cargando...</p></section>
+    <section class="av-panel"><div class="av-panel-titulo"><div><span class="av-icono">🔎</span><h2>Fuentes bibliográficas</h2></div></div><div id="av-fuentes" class="av-fuentes"><p>Cargando fuentes...</p></div></section>
+    <section id="av-admin" class="av-panel av-admin" hidden>
+      <div class="av-panel-titulo"><div><span class="av-icono">✎</span><h2>Administrar información académica</h2></div></div>
+      <label>Finalidad educativa<textarea id="av-edit-finalidad" rows="4"></textarea></label>
+      <label>Estudios y fundamentos<textarea id="av-edit-estudios" rows="5"></textarea></label>
+      <div class="av-subtitulo"><h3>Fuentes bibliográficas</h3><button id="av-agregar-fuente" type="button" class="av-secundario">+ Agregar fuente</button></div>
+      <div id="av-edit-fuentes"></div><button id="av-guardar-info" class="av-primario" type="button">Guardar información</button>
+    </section>
+    <section id="av-revision" class="av-panel av-admin" hidden>
+      <div class="av-panel-titulo"><div><span class="av-icono">✓</span><h2>Revisión pedagógica</h2></div></div>
+      <div class="av-tabs"><button class="activo" data-estado="PENDIENTE">Pendientes</button><button data-estado="APROBADO">Aprobados</button><button data-estado="RECHAZADO">Rechazados</button></div>
+      <div id="av-lista-contenido" class="av-lista"><p>Consultando contenido...</p></div>
+      <div id="av-detalle" class="av-detalle" hidden></div>
+    </section>
+    <section id="av-historial" class="av-panel av-admin" hidden><div class="av-panel-titulo"><div><span class="av-icono">◷</span><h2>Historial de revisiones</h2></div></div><div id="av-lista-historial"></div></section>
+    <p class="av-pie">Wordy · Donde las letras cobran vida</p>
+  </main>
+  <script src="avalamiento.js"></script>
+</body></html>

@@ -3,6 +3,9 @@
    ========================================================== */
 
 const CLAVE_SESION = 'wordy_sesion';
+
+// Avalamiento está disponible para tutores y psicopedagogos.
+try { const s = JSON.parse(sessionStorage.getItem(CLAVE_SESION)); const b = document.getElementById('btnAvalamiento'); if (b) b.hidden = !s || ![1,4].includes(Number(s.id_rol)); } catch (_) {}
 const PREFIJO_PROGRESO = 'wordy_progreso_';
 const CLAVE_ULTIMO_REFRAN = 'wordy_ultimo_refran';
 
